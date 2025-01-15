@@ -20,7 +20,6 @@ datasource db {
   }
   
   
-  
   model Invoice {
     id            String        @id
     name          String
@@ -37,6 +36,7 @@ datasource db {
     userId        String
     createdById   User          @relation("UserInvoices", fields: [userId], references: [id])
   }
+  
   
   model InvoiceLine {
     id          String   @id @default(uuid())
