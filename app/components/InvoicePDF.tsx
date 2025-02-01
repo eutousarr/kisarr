@@ -57,7 +57,7 @@ const InvoicePDF: React.FC<FacturePDFProps> = ({ invoice, totals }) => {
 
   return (
     <div className="mt-4 hidden lg:block">
-      <div className="rounded-xl border-2 border-dashed border-base-300 p-5">
+      <div className="rounded-xl border-2 border-dashed border-base-300 p-3">
         <button
           onClick={handleDownloadPdf}
           className="mb4 btn btn-accent btn-sm"
@@ -72,8 +72,8 @@ const InvoicePDF: React.FC<FacturePDFProps> = ({ invoice, totals }) => {
               <div className="border-1 relative flex items-center rounded-xl">
                 <Image
                   src="/taureau1.png"
-                  width={64}
-                  height={64}
+                  width={56}
+                  height={56}
                   alt="Logo Kis@rrw3b"
                   className="bottom-2 z-0 ml-2 border-spacing-2 rounded-full shadow-2xl"
                 />
@@ -84,13 +84,14 @@ const InvoicePDF: React.FC<FacturePDFProps> = ({ invoice, totals }) => {
                   </span>
                 </div>
                 <div className="absolute right-[10] top-[-36] rounded-3xl bg-transparent p-2 text-orange-500">
-                  <SatelliteDish className="h-12 w-12" />
+                  <SatelliteDish className="h-8 w-8" />
                 </div>
               </div>
               <h1 className="mt-4 text-4xl font-bold">Facture</h1>
             </div>
             <div className="text-right uppercase">
-              <p className="text-lg badge badge-warning">Facture n° {invoice.id}/{invoice.name}</p>
+              <p className="text-xl font-semibold badge badge-outline">Facture n° {invoice.id}</p><br />
+              <p className="text-lg underline">{invoice.name}</p>
               <p className="my-2">
                 <strong>Date </strong>
                 {formatDate(invoice.invoiceDate)}

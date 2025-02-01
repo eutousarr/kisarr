@@ -100,7 +100,7 @@ const InvoiceLines: React.FC<Props> = ({ invoice, setInvoice }) => {
                   />
                 </td>
                 <td className="font-bold">
-                  {(line.quantity * line.unitPrice).toFixed(2)}xof
+                  {(line.quantity * line.unitPrice).toFixed(0)} xof
                 </td>
                 <td>
                   <button

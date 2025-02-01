@@ -7,43 +7,87 @@
 generator client {
   provider = "prisma-client-js"
 }
+
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
-  model User {
-    id                String @id @default(uuid())
-    name              String
-    email             String @unique
-    invoices          Invoice[] @relation("UserInvoices")
-  }
-  
-  
-  model Invoice {
-    id            String        @id
-    name          String
-    issuerName    String        @default("")
-    issuerAddress String        @default("")
-    clientName    String        @default("")
-    clientAddress String        @default("")
-    invoiceDate   String        @default("")
-    dueDate       String        @default("")
-    vatActive     Boolean       @default(false)
-    vatRate       Float         @default(20)
-    status        Int           @default(1)
-    lines         InvoiceLine[] @relation("InvoiceLines")
-    userId        String
-    createdById   User          @relation("UserInvoices", fields: [userId], references: [id])
-  }
-  
-  
-  model InvoiceLine {
-    id          String   @id @default(uuid())
-    description String   @default("")
-    quantity    Int      @default(0)
-    unitPrice   Float    @default(0)
-    invoiceId   String?
-    invoice     Invoice? @relation("InvoiceLines", fields: [invoiceId], references: [id], onDelete: Cascade)
-  }
-  
+model User {
+  id            String    @id @default(uuid())
+  name          String
+  email         String    @unique
+  password      String?
+  role          String    @default("USER")
+  posts         Post[]
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  invoices      Invoice[] @relation("UserInvoices")
+  todos         Todo[]
+}
+
+enum Role {
+  USER
+  MANAGER
+  ADMIN
+}
+
+model Invoice {
+  id            String        @id
+  name          String
+  issuerName    String        @default("")
+  issuerAddress String        @default("")
+  clientName    String        @default("")
+  clientAddress String        @default("")
+  invoiceDate   String        @default("")
+  dueDate       String        @default("")
+  vatActive     Boolean       @default(false)
+  vatRate       Float         @default(20)
+  status        Int           @default(1)
+  lines         InvoiceLine[] @relation("InvoiceLines")
+  userId        String
+  createdById   User          @relation("UserInvoices", fields: [userId], references: [id])
+}
+
+model InvoiceLine {
+  id          String   @id @default(uuid())
+  description String   @default("")
+  quantity    Int      @default(0)
+  unitPrice   Float    @default(0)
+  invoiceId   String?
+  invoice     Invoice? @relation("InvoiceLines", fields: [invoiceId], references: [id], onDelete: Cascade)
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  slug      String   @unique
+  content   String
+  userId    String
+  published Boolean  @default(false)
+  image     String?
+  auteur    User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tags      Tag[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tag {
+  id          Int     @id @default(autoincrement())
+  title       String
+  slug        String  @unique // (formData.get("title").replace(/\s+/g, "-").toLowerCase())
+  description String?
+  posts       Post[]
+}
+
+model Todo {
+  id        Int      @id @default(autoincrement())
+  title     String
+  done      Boolean  @default(false)
+  userId    String
+  owner      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

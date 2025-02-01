@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.9.6",
-    "@prisma/client": "^6.1.0",
+    "@prisma/client": "^6.2.1",
     "canvas-confetti": "^1.9.3",
     "html2canvas-pro": "^1.5.8",
     "jspdf": "^2.5.2",
@@ -27,7 +27,7 @@
     "@commitlint/config-conventional": "^19.6.0",
     "@eslint/eslintrc": "^3",
     "@types/canvas-confetti": "^1.9.0",
-    "@types/node": "^20",
+    "@types/node": "^20.17.13",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@typescript-eslint/parser": "^8.19.1",
@@ -44,8 +44,12 @@
     "postcss": "^8",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",
-    "prisma": "^6.1.0",
+    "prisma": "^6.2.1",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   }
 }

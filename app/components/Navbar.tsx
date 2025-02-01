@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Layers } from 'lucide-react';
 import React, { useEffect } from 'react';
-import { checkAndAddUser } from '../actions';
+import { checkAndAddUser } from '../actions/actions';
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -14,6 +14,18 @@ const Navbar = () => {
   const navLinks = [
     {
       href: '/',
+      label: 'Home',
+    },
+    {
+      href: '/blog',
+      label: 'Blog',
+    },
+    {
+      href: '/a-faire',
+      label: 'Tâches',
+    },
+    {
+      href: '/invoice',
       label: 'Factures',
     },
   ];
@@ -41,7 +53,7 @@ const Navbar = () => {
     });
 
   return (
-    <div className="border-b border-base-300 px-5 py-4 md:px-[10%]">
+    <div className="border-b border-base-300 px-5 py-4 md:px-[10%] bg-red-100">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <div className="rounded-full bg-accent-content p-2 text-accent">

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 'use client';
-import { deleteInvoice, getInvoiceById, updateInvoice } from '@/app/actions';
+import { deleteInvoice, getInvoiceById, updateInvoice } from '@/app/actions/actions';
 import InvoiceInfo from '@/app/components/InvoiceInfo';
 import InvoiceLines from '@/app/components/InvoiceLines';
 import InvoicePDF from '@/app/components/InvoicePDF';
@@ -154,19 +154,19 @@ const page = ({ params }: { params: Promise<{ invoiceId: string }> }) => {
 
               <div className="flex justify-between">
                 <span>Total Hors Taxes</span>
-                <span> {totals.totalHT.toFixed(2)} xof</span>
+                <span> {totals.totalHT.toFixed(0)} fr</span>
               </div>
 
               <div className="flex justify-between">
                 <span>
                   TVA ({invoice?.vatActive ? `${invoice?.vatRate}` : '0'} %)
                 </span>
-                <span> {totals.totalVAT.toFixed(2)}xof </span>
+                <span> {totals.totalVAT.toFixed(0)} fr </span>
               </div>
 
               <div className="flex justify-between font-bold">
                 <span>Total TTC</span>
-                <span> {totals.totalTTC.toFixed(2)}xof</span>
+                <span> {totals.totalTTC.toFixed(0)} fr</span>
               </div>
             </div>
 

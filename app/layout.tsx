@@ -26,8 +26,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" data-theme="fantasy">
+        
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-300 text-inherit font-sans min-h-screen`}
         >
           {children}
         </body>
